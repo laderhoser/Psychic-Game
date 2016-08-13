@@ -1,23 +1,31 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>Psychic Game</title>
+    <title>Psychic Game</title>
 </head>
+
 <body>
-
-	<div id="game">
-		<h1>Psychic Game</h1>
-		<p>Guess what letter im thinking of</p>
-	</div>
-	<div id="wins"><p>Wins: </p></div>
-	<div id="losses"><p>Losses: </p></div>
-	<div id="guessleft"><p>Guesses Left: </p></div>
-	<div id="guessfar">Your Guesses So Far: </div>
-
-
-<script type="text/javascript">
-    var computerChoices = ['a', 'b', 'c','d', 'e', 'f','g', 'h','i','j', 'k', 'l','m', 'n', 'o','p', 'q','r','s', 't', 'u','v', 'w', 'x','y','z']
-	var wins = 0;
+    <div id="game">
+        <h1>Psychic Game</h1>
+        <p>Guess what letter im thinking of</p>
+    </div>
+    <div id="wins">
+        <p>Wins: </p>
+    </div>
+    <br>
+    <div id="losses">
+        <p>Losses: </p>
+    </div>
+    <br>
+    <div id="guessleft">
+        <p>Guesses Left: </p>
+    </div>
+    <br>
+    <div id="guessfar">Your Guesses So Far: </div>
+    <script type="text/javascript">
+    var computerChoices = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+    var wins = 0;
     var losses = 0;
     var guessleft = 9;
 
@@ -28,22 +36,27 @@
     var userGuess;
 
     document.onkeyup = function(event) {
-	var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
-	console.log(userGuess)
+        var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+        console.log(userGuess);
+        
+        var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+        console.log(computerGuess);
 
-	var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
-	console.log(computerGuess)
+        if (computerGuess == userGuess) {
+        	wins += 1;
+            winsadd.innerHTML = "<p> Wins: " + wins + "</p>";
+            alert("You Win!");
 
-	if (computerGuess == userGuess){
-		winsadd.innerHTML = "Wins: " + wins++;
-		alert("You Win!")
-
-	}
-	else{
-		lossadd.innerHTML = "Losses: " + losses++;
-		guessrem.innerHTML = "Guesses Left: " + --guessleft;
-		guesssofar.innerHTML = "Your Guesses So Far: " + userGuess 
-	}}
-	
-	</script>
-</bo
+        } else {
+            losses += 1;
+            guessleft -= 1;
+            lossadd.innerHTML = "<p> Losses: " + losses + "</p>";
+            guessrem.innerHTML = "<p> Your Guesses So Far:" + guessleft + "</p>";
+            guesssofar.innerHTML += userGuess;
+            if(guessleft === 0){
+              alert("You lose! Try again.");
+            }
+        }
+    }
+    </script>
+</body>
