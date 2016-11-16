@@ -34,29 +34,44 @@
     var guessrem = document.getElementById('guessleft')
     var guesssofar = document.getElementById('guessfar')
     var userGuess;
+  var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+        console.log("computer guess: " + computerGuess);
 
+   
+function startGame(){
     document.onkeyup = function(event) {
         var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
-        console.log(userGuess);
+        console.log("user guess: " + userGuess);
         
-        var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
-        console.log(computerGuess);
+      
 
         if (computerGuess == userGuess) {
         	wins += 1;
             winsadd.innerHTML = "<p> Wins: " + wins + "</p>";
             alert("You Win!");
+            reset();
 
         } else {
-            losses += 1;
+            
             guessleft -= 1;
             lossadd.innerHTML = "<p> Losses: " + losses + "</p>";
             guessrem.innerHTML = "<p> Your Guesses So Far:" + guessleft + " </p>";
             guesssofar.innerHTML += userGuess;
             if(guessleft === 0){
+            losses += 1;
+             lossadd.innerHTML = "<p> Losses: " + losses + "</p>"; 
               alert("You lose! Try again.");
+              reset();
             }
         }
     }
+}
+    function reset(){
+        guessleft = 9;
+       
+        startGame();
+    }
+
+    startGame();
     </script>
 </body>
