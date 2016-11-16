@@ -58,12 +58,10 @@
    
 function startGame(){
     document.onkeyup = function(event) {
-        var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+        userGuess = String.fromCharCode(event.keyCode).toLowerCase();
         console.log("user guess: " + userGuess);
         
-      
-
-        if (computerGuess == userGuess) {
+        if (computerGuess === userGuess) {
         	wins++;
             winsadd.innerHTML = "<p> Wins: " + wins + "</p>";
             alert("You Win!");
@@ -82,10 +80,12 @@ function startGame(){
               reset();
             }
         }
+      
+
     }
 }
     
-	function clearGuess(elementID)
+	function clearGuess()
 {
     document.getElementById("guessfar").innerHTML = "<p> Your Guesses So Far: </p>";
 }
@@ -93,11 +93,13 @@ function startGame(){
 
     function reset(){
         guessleft = 9;
-       var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+       computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
         console.log("computer guess: " + computerGuess);
         clearGuess();
         startGame();
     }
+
+
 
     startGame();
     </script>
