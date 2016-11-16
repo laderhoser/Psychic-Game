@@ -8,39 +8,31 @@
 
 <body>
     <div id="game" class="jumbotron">
-    	<div class="container">
-    		<h1>Psychic Game</h1>
-    		<p>Guess what number Im thinking of...</p>
-    		
-    	</div>
-    </div>
-
-    <div  class="panel panel-default">
-    	<div id ="wins" class="panel-body">
-    		<p>Wins: </p>
-    	</div>
-    </div>
-   
-    <div class="panel panel-default">
-    	<div id="losses" class="panel-body">
-    		 <p>Losses: </p>
-    	</div>
-    </div>
-    
-    <div class="panel panel-default">
-    	<div id="guessleft" class="panel-body">
-    		<p>Guesses Left: </p>
-    	</div>
+        <div class="container">
+            <h1>Psychic Game</h1>
+            <p>Guess what number Im thinking of...</p>
+        </div>
     </div>
     <div class="panel panel-default">
-    	<div id="guessfar" class="panel-body">
-    		Your Guesses So Far:
-    	</div>
+        <div id="wins" class="panel-body">
+            <p>Wins: </p>
+        </div>
     </div>
-    
-    
-
-
+    <div class="panel panel-default">
+        <div id="losses" class="panel-body">
+            <p>Losses: </p>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div id="guessleft" class="panel-body">
+            <p>Guesses Left: </p>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div id="guessfar" class="panel-body">
+            Your Guesses So Far:
+        </div>
+    </div>
     <script type="text/javascript">
     var computerChoices = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
     var wins = 0;
@@ -52,48 +44,47 @@
     var guessrem = document.getElementById('guessleft')
     var guesssofar = document.getElementById('guessfar')
     var userGuess;
-  var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
-        console.log("computer guess: " + computerGuess);
+    var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+    console.log("computer guess: " + computerGuess);
 
-   
-function startGame(){
-    document.onkeyup = function(event) {
-        userGuess = String.fromCharCode(event.keyCode).toLowerCase();
-        console.log("user guess: " + userGuess);
-        
-        if (computerGuess === userGuess) {
-        	wins++;
-            winsadd.innerHTML = "<p> Wins: " + wins + "</p>";
-            alert("You Win!");
-            reset();
 
-        } else {
-            
-            guessleft--;
-            lossadd.innerHTML = "<p> Losses: " + losses + "</p>";
-            guessrem.innerHTML = "<p> Your Guesses So Far:" + guessleft + " </p>";
-            guesssofar.innerHTML += userGuess;
-            if(guessleft === 0){
-            losses++;
-             lossadd.innerHTML = "<p> Losses: " + losses + "</p>"; 
-              alert("You lose! Try again.");
-              reset();
+    function startGame() {
+        document.onkeyup = function(event) {
+            userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+            console.log("user guess: " + userGuess);
+
+            if (computerGuess === userGuess) {
+                wins++;
+                winsadd.innerHTML = "<p> Wins: " + wins + "</p>";
+                alert("You Win!");
+                reset();
+
+            } else {
+
+                guessleft--;
+                lossadd.innerHTML = "<p> Losses: " + losses + "</p>";
+                guessrem.innerHTML = "<p> Your Guesses So Far:" + guessleft + " </p>";
+                guesssofar.innerHTML += userGuess;
+                if (guessleft === 0) {
+                    losses++;
+                    lossadd.innerHTML = "<p> Losses: " + losses + "</p>";
+                    alert("You lose! Try again.");
+                    reset();
+                }
             }
+
+
         }
-      
-
     }
-}
-    
-	function clearGuess()
-{
-    document.getElementById("guessfar").innerHTML = "<p> Your Guesses So Far: </p>";
-}
+
+    function clearGuess() {
+        document.getElementById("guessfar").innerHTML = "<p> Your Guesses So Far: </p>";
+    }
 
 
-    function reset(){
+    function reset() {
         guessleft = 9;
-       computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+        computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
         console.log("computer guess: " + computerGuess);
         clearGuess();
         startGame();
